@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:trinity_wizards_alkaff_pretest/consts/const_colors.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/main_page.dart';
 
 void main() {
@@ -11,14 +14,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Alkaff - Trinity Wizards',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ProviderScope(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Alkaff - Trinity Wizards',
+        theme: ThemeData(
+          fontFamily: GoogleFonts.poppins().fontFamily,
+          colorScheme: ColorScheme.fromSeed(seedColor: ConstColors.blue),
+          useMaterial3: true,
+        ),
+        home: const MainPage(),
       ),
-      home: const MainPage(),
     );
   }
 }

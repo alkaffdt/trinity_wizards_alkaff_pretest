@@ -5,4 +5,7 @@ class ConstColors {
   static const Color darkGray = Color(0xFFCCCCCC);
   static const Color lightGray = Color(0xFFEBEBEB);
   static const Color red = Color(0xFFED1C2E);
+
+  // card fonts
+  // static const Color contactFullname = Color(0xff06032696);
 }
