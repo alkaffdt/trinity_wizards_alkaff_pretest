@@ -20,8 +20,7 @@ to check if the email or phone is valid -- Email should be validated to (using @
 and .com). Also, if the first name and last name changes, should have change the
 initial in the profile picture as well. Please keep in mind that date of birth should be
 the date picker, you can use flutter in app widget for calendar picker. When editing
-on the field, must have a `next` keyboard type, and must bring user to the next
-input field.
+on the field, must have a `next` keyboard type, and must bring user to the next input field.
 - ✅ Clicking on the update button, will update the contact list at `Home
 Page` section. Clicking remove button, will remove the contact list, need to pop the
 page and go back to previous page after updating or removing the contacts.
