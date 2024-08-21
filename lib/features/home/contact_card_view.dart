@@ -73,11 +73,5 @@ class _ContactName extends ConsumerWidget {
         ],
       ),
     );
-
-    // return Text(
-    //   name,
-    //   maxLines: 2,
-    //   overflow: TextOverflow.ellipsis,
-    // ).fontSize(13).textColor(Colors.black54).center();
   }
 }
