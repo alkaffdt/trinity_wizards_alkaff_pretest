@@ -13,6 +13,8 @@ class BaseTextField extends StatelessWidget {
       required this.onChanged,
       this.onTap,
       this.validator,
+      this.focusNode,
+      this.textInputAction = TextInputAction.next,
       this.isRequired = false});
   final TextEditingController textController;
   final String title;
@@ -25,6 +27,8 @@ class BaseTextField extends StatelessWidget {
   final Widget? suffixWidget;
   //
   final FormFieldValidator<String>? validator;
+  final TextInputAction textInputAction;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +61,9 @@ class BaseTextField extends StatelessWidget {
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
+          focusNode: focusNode,
           validator: validator,
+          textInputAction: textInputAction,
         )
       ],
     );

@@ -150,17 +150,62 @@ class _EmailField extends ConsumerWidget {
       onChanged: (text) {
         ref.read(contactDetailControllerProvider.notifier).onChangedEmail();
       },
+      textInputAction: TextInputAction.next,
     );
   }
 }
 
-class _DateOfBirthField extends ConsumerWidget {
+class _DateOfBirthField extends ConsumerStatefulWidget {
   const _DateOfBirthField({super.key});
 
-  final String title = "Date Of Birth";
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      __DateOfBirthFieldState();
+}
+
+class __DateOfBirthFieldState extends ConsumerState<_DateOfBirthField> {
+  final _focusNode = FocusNode();
+  bool isPickerOpened = false;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      _showDatePicker();
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _showDatePicker() {
+    if (isPickerOpened) return;
+    _focusNode.unfocus();
+    isPickerOpened = true;
+
+    final textController =
+        ref.read(contactDetailControllerProvider.notifier).dateOfBirthTextCtr;
+
+    showDatePicker(
+      context: context,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    ).then(
+      (value) {
+        final formatter = DateFormat('dd/MM/yyyy');
+        textController.text = formatter.format(value ?? DateTime.now());
+        //
+        isPickerOpened = false;
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const String title = "Date Of Birth";
     final textController =
         ref.watch(contactDetailControllerProvider.notifier).dateOfBirthTextCtr;
 
@@ -168,6 +213,7 @@ class _DateOfBirthField extends ConsumerWidget {
       textController: textController,
       title: title,
       hint: "Enter $title",
+      focusNode: _focusNode,
       prefixWidget: const Icon(
         Icons.calendar_month_outlined,
         color: ConstColors.blue,
@@ -178,16 +224,9 @@ class _DateOfBirthField extends ConsumerWidget {
             .onChangedDateOfBirth();
       },
       onTap: () {
-        showDatePicker(
-          context: context,
-          firstDate: DateTime(1900),
-          lastDate: DateTime.now(),
-        ).then(
-          (value) {
-            final formatter = DateFormat('dd/MM/yyyy');
-            textController.text = formatter.format(value ?? DateTime.now());
-          },
-        );
+        isPickerOpened = false;
+
+        _showDatePicker();
       },
     );
   }

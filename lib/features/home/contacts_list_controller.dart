@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:trinity_wizards_alkaff_pretest/cores/extensions/list_extensions.dart';
 import 'package:trinity_wizards_alkaff_pretest/models/contact_model.dart';
 
 final contactListControllerProvider =
@@ -83,5 +84,11 @@ class ContactsListController extends StateNotifier<List<Contact>> {
     //update master
     masterData = list;
     state = list;
+  }
+
+  Contact? findContact(String contactId) {
+    return state.firstWhereOrNull(
+      (element) => element.id == contactId,
+    );
   }
 }
