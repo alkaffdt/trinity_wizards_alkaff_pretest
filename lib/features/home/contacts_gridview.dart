@@ -8,12 +8,11 @@ class ContactsListview extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(contactListControllerProvider);
     final list = ref.watch(contactListControllerProvider);
 
     return GridView.builder(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 26,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 25),
       itemCount: list.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 0.9,
