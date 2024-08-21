@@ -7,6 +7,7 @@ import 'package:trinity_wizards_alkaff_pretest/cores/styles/text_styles.dart';
 import 'package:trinity_wizards_alkaff_pretest/cores/utils/common_utils.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/contact_detail/contact_detail_controller.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/contact_detail/contact_detail_page.dart';
+import 'package:trinity_wizards_alkaff_pretest/features/login/auth_controller.dart';
 import 'package:trinity_wizards_alkaff_pretest/models/contact_model.dart';
 
 class ContactItemView extends ConsumerWidget {
@@ -33,12 +34,50 @@ class ContactItemView extends ConsumerWidget {
           children: [
             BaseProfilePicture(contact),
             8.toHeightGap(),
-            Text("${contact.firstName} ${contact.lastName}")
-                .fontSize(13)
-                .textColor(Colors.black54)
+            _ContactName(contact)
           ],
         ),
       ),
     );
+  }
+}
+
+class _ContactName extends ConsumerWidget {
+  _ContactName(this.contact, {super.key});
+
+  Contact contact;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isMyProfile =
+        ref.watch(authProvider.notifier).isAuthProfile(contact.id);
+    final currentTextTheme = Theme.of(context).textTheme;
+
+    final name = "${contact.firstName} ${contact.lastName}";
+
+    return RichText(
+      textAlign: TextAlign.center,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
+      text: TextSpan(
+        text: name,
+        style: currentTextTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w400, color: Colors.black54, fontSize: 14),
+        children: <TextSpan>[
+          if (isMyProfile)
+            const TextSpan(
+              text: "(you)",
+              style: TextStyle(
+                  color: ConstColors.darkGray, fontStyle: FontStyle.italic),
+            ),
+        ],
+      ),
+    );
+
+    // return Text(
+    //   name,
+    //   maxLines: 2,
+    //   overflow: TextOverflow.ellipsis,
+    // ).fontSize(13).textColor(Colors.black54).center();
   }
 }

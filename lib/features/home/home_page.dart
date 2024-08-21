@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
           // top margin
           10.toHeightGap(),
           const SearchContactField(),
-          const Expanded(child: ContactsListview())
+          const Expanded(child: ContactsGridview())
         ],
       ),
     );

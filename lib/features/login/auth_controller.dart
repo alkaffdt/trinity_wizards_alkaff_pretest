@@ -62,6 +62,10 @@ class AuthController extends StateNotifier<AuthState> {
     state = state.copyWith(profile: profile);
   }
 
+  bool isAuthProfile(String contactId) {
+    return state.profile?.id == contactId;
+  }
+
   Contact get profile {
     return state.profile!;
   }
