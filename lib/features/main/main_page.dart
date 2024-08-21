@@ -4,7 +4,7 @@ import 'package:trinity_wizards_alkaff_pretest/cores/styles/text_styles.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/main/bottom_navbar.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/home/floating_action_button.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/home/home_page.dart';
-import 'package:trinity_wizards_alkaff_pretest/features/main/custom_appbar.dart';
+import 'package:trinity_wizards_alkaff_pretest/features/main/base_appbar.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/profile/my_profile_page.dart';
 
 class MainPage extends StatefulWidget {

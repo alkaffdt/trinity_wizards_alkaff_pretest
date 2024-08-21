@@ -20,7 +20,7 @@ class AuthController extends StateNotifier<AuthState> {
   final key = "authAccess";
 
   void logIn() {
-    // 5c8a80f5437a24a66ac7e0c5
+    // e5c8a80f5437a24a66ac7e0c5
     final authContact =
         contactsListController.findContact(userIdTextController.text);
 
@@ -68,5 +68,16 @@ class AuthController extends StateNotifier<AuthState> {
 
   Contact get profile {
     return state.profile!;
+  }
+
+  void logOut() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    sharedPreferences.remove(key);
+
+    userIdTextController.text = "";
+
+    // Then reset AuthState
+    state = AuthState();
   }
 }

@@ -10,7 +10,7 @@ import 'package:trinity_wizards_alkaff_pretest/cores/styles/text_styles.dart';
 import 'package:trinity_wizards_alkaff_pretest/cores/utils/common_validators.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/contact_detail/contact_detail_controller.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/contact_detail/contact_detail_cta.dart';
-import 'package:trinity_wizards_alkaff_pretest/features/main/custom_appbar.dart';
+import 'package:trinity_wizards_alkaff_pretest/features/main/base_appbar.dart';
 import 'package:trinity_wizards_alkaff_pretest/models/contact_model.dart';
 
 class ContactDetailPage extends StatelessWidget {
@@ -20,7 +20,7 @@ class ContactDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppbar(
+      appBar: const BaseAppbar(
         title: "Contact Details",
         padding: EdgeInsets.zero,
       ),

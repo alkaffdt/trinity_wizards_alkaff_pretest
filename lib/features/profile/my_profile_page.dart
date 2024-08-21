@@ -7,6 +7,7 @@ import 'package:trinity_wizards_alkaff_pretest/cores/extensions/int_extensions.d
 import 'package:trinity_wizards_alkaff_pretest/features/contact_detail/contact_detail_controller.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/contact_detail/contact_detail_page.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/login/auth_controller.dart';
+import 'package:trinity_wizards_alkaff_pretest/models/contact_model.dart';
 
 class MyProfilePage extends ConsumerWidget {
   const MyProfilePage({super.key});
@@ -14,7 +15,9 @@ class MyProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final myProfile = ref.watch(authProvider.select(
-      (value) => value.profile!,
+      (value) =>
+          value.profile ??
+          Contact(id: "id", firstName: "", lastName: "", dob: "", email: ""),
     ));
 
     return Padding(
