@@ -12,31 +12,45 @@ class ContactDetailCta extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isCreateNewContact =
+        ref.watch(contactDetailControllerProvider).contact == null;
+
     return Column(
       children: [
-        CtaButton(
-          text: "Update",
-          onPressed: () {
-            ref.read(contactDetailControllerProvider).updateContact();
+        if (isCreateNewContact)
+          CtaButton(
+            text: "Save",
+            onPressed: () {
+              ref.read(contactDetailControllerProvider).createNewContact();
 
-            Navigator.pop(context);
-          },
-        ),
-        16.toHeightGap(),
-        CtaButton(
-          backgroundColor: Colors.white,
-          text: "Remove",
-          foregroundColor: ConstColors.red,
-          borderColor: ConstColors.red,
-          fontWeight: FontWeight.w100,
-          onPressed: () {
-            ref.read(contactDetailControllerProvider).removeContact();
+              Navigator.pop(context);
+            },
+          )
+        else ...[
+          CtaButton(
+            text: "Update",
+            onPressed: () {
+              ref.read(contactDetailControllerProvider).updateContact();
 
-            Navigator.pop(context);
+              Navigator.pop(context);
+            },
+          ),
+          16.toHeightGap(),
+          CtaButton(
+            backgroundColor: Colors.white,
+            text: "Remove",
+            foregroundColor: ConstColors.red,
+            borderColor: ConstColors.red,
+            fontWeight: FontWeight.w100,
+            onPressed: () {
+              ref.read(contactDetailControllerProvider).removeContact();
 
-            // show popup/snackbar
-          },
-        )
+              Navigator.pop(context);
+
+              // show popup/snackbar
+            },
+          )
+        ]
       ],
     );
   }

@@ -20,7 +20,7 @@ class ContactItemView extends ConsumerWidget {
         ref.read(contactDetailControllerProvider).loadContact(contact);
 
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ContactDetailPage(contact)));
+            builder: (context) => ContactDetailPage(contact: contact)));
       },
       child: Container(
         decoration: BoxDecoration(

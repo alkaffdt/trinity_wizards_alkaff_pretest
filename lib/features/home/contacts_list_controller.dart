@@ -49,7 +49,15 @@ class ContactsListController extends StateNotifier<List<Contact>> {
         .toList();
   }
 
-  void createNewContact(Contact newContact) {}
+  void createNewContact(Contact newContact) {
+    List<Contact> list = List.from(state);
+
+    list.insert(0, newContact);
+
+    //update master
+    masterData = list;
+    state = list;
+  }
 
   void updateContact(Contact updatedContact) {
     List<Contact> list = List.from(state);
@@ -60,6 +68,8 @@ class ContactsListController extends StateNotifier<List<Contact>> {
 
     list[selectedIndex] = updatedContact;
 
+    //update master
+    masterData = list;
     state = list;
   }
 
@@ -70,6 +80,8 @@ class ContactsListController extends StateNotifier<List<Contact>> {
       (element) => element.id == contactId,
     );
 
+    //update master
+    masterData = list;
     state = list;
   }
 }

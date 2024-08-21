@@ -30,6 +30,20 @@ class ContactDetailController {
     dateOfBirthTextCtr.text = contact?.dob ?? "";
   }
 
+  void createNewContact() {
+    final randomUniqueId =
+        DateTime.now().millisecondsSinceEpoch.remainder(100000).toString();
+
+    final newContact = Contact(
+        id: lastNameTextCtr.text + randomUniqueId + firstNameTextCtr.text,
+        firstName: firstNameTextCtr.text,
+        lastName: lastNameTextCtr.text,
+        email: emailTextCtr.text,
+        dob: dateOfBirthTextCtr.text);
+
+    contactsListController.createNewContact(newContact);
+  }
+
   void removeContact() {
     contactsListController.removeContact(contact?.id ?? "");
   }

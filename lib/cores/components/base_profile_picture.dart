@@ -15,8 +15,13 @@ class BaseProfilePicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profilPictureStr = CommonUtils.generateProfilePicture(
-        firstName: contact?.firstName ?? "", lastName: contact?.lastName ?? "");
+    late String profilPictureStr;
+
+    if (contact != null) {
+      profilPictureStr = CommonUtils.generateProfilePicture(
+          firstName: contact?.firstName ?? "",
+          lastName: contact?.lastName ?? "");
+    }
 
     return Container(
       height: size,

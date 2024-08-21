@@ -12,8 +12,8 @@ import 'package:trinity_wizards_alkaff_pretest/features/main/custom_appbar.dart'
 import 'package:trinity_wizards_alkaff_pretest/models/contact_model.dart';
 
 class ContactDetailPage extends StatelessWidget {
-  const ContactDetailPage(this.contact, {super.key});
-  final Contact contact;
+  const ContactDetailPage({super.key, this.contact});
+  final Contact? contact;
 
   @override
   Widget build(BuildContext context) {
