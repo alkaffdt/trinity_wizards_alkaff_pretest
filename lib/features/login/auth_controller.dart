@@ -29,9 +29,11 @@ class AuthController extends StateNotifier<AuthState> {
       return;
     }
 
+    // IF success,
     // then encrypt & save it to device's storage
     saveAuth();
     //
+    // then tell the related UIs
     state = state.copyWith(
         profile: authContact, status: AuthenticationStatus.authenticated);
   }
@@ -54,5 +56,13 @@ class AuthController extends StateNotifier<AuthState> {
 
       logIn();
     }
+  }
+
+  void updateProfile(Contact profile) {
+    state = state.copyWith(profile: profile);
+  }
+
+  Contact get profile {
+    return state.profile!;
   }
 }

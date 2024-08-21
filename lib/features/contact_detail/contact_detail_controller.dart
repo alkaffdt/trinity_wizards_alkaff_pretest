@@ -3,19 +3,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trinity_wizards_alkaff_pretest/cores/utils/common_validators.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/contact_detail/states/contact_detail_state.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/home/contacts_list_controller.dart';
+import 'package:trinity_wizards_alkaff_pretest/features/login/auth_controller.dart';
 import 'package:trinity_wizards_alkaff_pretest/models/contact_model.dart';
 
 final contactDetailControllerProvider =
     StateNotifierProvider<ContactDetailController, ContactDetailState>((ref) {
   return ContactDetailController(
-      ref.watch(contactListControllerProvider.notifier));
+      ref.watch(contactListControllerProvider.notifier),
+      authController: ref.watch(authProvider.notifier));
 });
 
 class ContactDetailController extends StateNotifier<ContactDetailState> {
-  ContactDetailController(this.contactsListController)
+  ContactDetailController(this.contactsListController,
+      {required this.authController})
       : super(ContactDetailState());
 
   final ContactsListController contactsListController;
+  final AuthController authController;
   Contact? contact;
 
   TextEditingController firstNameTextCtr = TextEditingController();
@@ -67,7 +71,17 @@ class ContactDetailController extends StateNotifier<ContactDetailState> {
         email: emailTextCtr.text,
         dob: dateOfBirthTextCtr.text);
 
+    //
     contactsListController.updateContact(updatedContact);
+    updateAuthProfile(updatedContact);
+  }
+
+  void updateAuthProfile(Contact updatedContact) {
+    final isAuthProfile = authController.profile.id == contact?.id;
+
+    if (isAuthProfile) {
+      authController.updateProfile(updatedContact);
+    }
   }
 
   void onChangedFirstName() {

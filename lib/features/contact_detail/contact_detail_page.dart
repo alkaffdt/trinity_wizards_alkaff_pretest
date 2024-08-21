@@ -20,7 +20,10 @@ class ContactDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BaseAppbar(title: "Contact Details"),
+      appBar: BaseAppbar(
+        title: "Contact Details",
+        padding: EdgeInsets.zero,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 27, vertical: 24)
             .copyWith(bottom: 45),
