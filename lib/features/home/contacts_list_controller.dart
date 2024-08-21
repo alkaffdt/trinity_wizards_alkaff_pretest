@@ -21,7 +21,7 @@ class ContactsListController extends StateNotifier<List<Contact>> {
     gatherContactsFromJson();
   }
 
-  void gatherContactsFromJson() async {
+  Future<void> gatherContactsFromJson() async {
     final String response =
         await rootBundle.loadString('assets/datas/contacts.json');
     final data = await json.decode(response) as List;

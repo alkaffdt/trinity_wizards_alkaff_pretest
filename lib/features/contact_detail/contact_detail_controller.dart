@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:trinity_wizards_alkaff_pretest/cores/utils/common_validators.dart';
+import 'package:trinity_wizards_alkaff_pretest/features/contact_detail/states/contact_detail_state.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/home/contacts_list_controller.dart';
 import 'package:trinity_wizards_alkaff_pretest/models/contact_model.dart';
 
 final contactDetailControllerProvider =
-    Provider<ContactDetailController>((ref) {
+    StateNotifierProvider<ContactDetailController, ContactDetailState>((ref) {
   return ContactDetailController(
       ref.watch(contactListControllerProvider.notifier));
 });
 
-class ContactDetailController {
-  ContactDetailController(this.contactsListController);
+class ContactDetailController extends StateNotifier<ContactDetailState> {
+  ContactDetailController(this.contactsListController)
+      : super(ContactDetailState());
 
   final ContactsListController contactsListController;
   Contact? contact;
@@ -28,6 +31,14 @@ class ContactDetailController {
     lastNameTextCtr.text = contact?.lastName ?? "";
     emailTextCtr.text = contact?.email ?? "";
     dateOfBirthTextCtr.text = contact?.dob ?? "";
+
+    //
+    state = state.copyWith(
+      firstName: firstNameTextCtr.text,
+      lastName: lastNameTextCtr.text,
+      email: emailTextCtr.text,
+      dateOfBirth: dateOfBirthTextCtr.text,
+    );
   }
 
   void createNewContact() {
@@ -60,18 +71,27 @@ class ContactDetailController {
   }
 
   void onChangedFirstName() {
-    //
+    state = state.copyWith(firstName: firstNameTextCtr.text);
   }
 
   void onChangedLastName() {
-    //
+    state = state.copyWith(lastName: lastNameTextCtr.text);
   }
 
   void onChangedEmail() {
-    //
+    state = state.copyWith(email: emailTextCtr.text);
   }
 
   void onChangedDateOfBirth() {
-    //
+    state = state.copyWith(dateOfBirth: dateOfBirthTextCtr.text);
+  }
+
+  bool isValidated() {
+    final isEmailValidated = CommonValidator.validateEmail(state.email);
+
+    final isNameValidated =
+        state.firstName.isNotEmpty && state.lastName.isNotEmpty;
+
+    return isEmailValidated && isNameValidated;
   }
 }

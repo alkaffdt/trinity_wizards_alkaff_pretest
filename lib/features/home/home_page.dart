@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trinity_wizards_alkaff_pretest/cores/extensions/int_extensions.dart';
 import 'package:trinity_wizards_alkaff_pretest/features/home/contacts_gridview.dart';
-import 'package:trinity_wizards_alkaff_pretest/features/home/search_field.dart';
+import 'package:trinity_wizards_alkaff_pretest/features/home/search_contact_field.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

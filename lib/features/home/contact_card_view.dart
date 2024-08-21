@@ -17,7 +17,7 @@ class ContactItemView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        ref.read(contactDetailControllerProvider).loadContact(contact);
+        ref.read(contactDetailControllerProvider.notifier).loadContact(contact);
 
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ContactDetailPage(contact: contact)));

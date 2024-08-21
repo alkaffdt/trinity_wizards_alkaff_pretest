@@ -8,7 +8,7 @@ class CtaButton extends StatelessWidget {
       this.height = 53,
       this.width = double.maxFinite,
       this.backgroundColor = ConstColors.blueAccent,
-      required this.onPressed,
+      this.onPressed,
       this.text = "",
       this.borderRadius = 10,
       this.borderColor = Colors.transparent,
@@ -19,7 +19,7 @@ class CtaButton extends StatelessWidget {
   final double width;
   final Color backgroundColor;
   final Color foregroundColor;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String text;
   final double borderRadius;
   final Color borderColor;
@@ -31,19 +31,24 @@ class CtaButton extends StatelessWidget {
       height: height,
       width: width,
       child: ElevatedButton(
-          style: ButtonStyle(
-              elevation: WidgetStateProperty.all(0.5),
-              shadowColor:
-                  WidgetStatePropertyAll(Colors.black.withOpacity(0.5)),
-              backgroundColor: WidgetStateProperty.all<Color>(backgroundColor),
-              foregroundColor: WidgetStateProperty.all<Color>(foregroundColor),
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(borderRadius),
-                      side: BorderSide(color: borderColor)))),
-          onPressed: () {
-            onPressed.call();
-          },
+          style: ElevatedButton.styleFrom(
+              elevation: 0.5,
+              backgroundColor: backgroundColor,
+              foregroundColor: foregroundColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  side: BorderSide(color: borderColor))),
+          // style: ButtonStyle(
+          //     elevation: WidgetStateProperty.all(0.5),
+          //     shadowColor:
+          //         WidgetStatePropertyAll(Colors.black.withOpacity(0.5)),
+          //     backgroundColor: WidgetStateProperty.all<Color>(backgroundColor),
+          //     foregroundColor: WidgetStateProperty.all<Color>(foregroundColor),
+          //     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          //         RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(borderRadius),
+          //             side: BorderSide(color: borderColor)))),
+          onPressed: onPressed,
           child: Text(text).fontWeight(fontWeight).fontSize(16)),
     );
   }

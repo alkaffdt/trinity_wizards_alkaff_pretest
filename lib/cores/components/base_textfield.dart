@@ -6,19 +6,25 @@ class BaseTextField extends StatelessWidget {
   const BaseTextField(
       {super.key,
       required this.textController,
-      this.prefixIcon,
+      this.prefixWidget,
+      this.suffixWidget,
       this.title = "",
       this.hint = "",
       required this.onChanged,
       this.onTap,
+      this.validator,
       this.isRequired = false});
   final TextEditingController textController;
-  final Widget? prefixIcon;
   final String title;
   final String hint;
   final bool isRequired;
   final ValueChanged<String> onChanged;
   final VoidCallback? onTap;
+  //
+  final Widget? prefixWidget;
+  final Widget? suffixWidget;
+  //
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +46,18 @@ class BaseTextField extends StatelessWidget {
           ),
         ),
         9.toHeightGap(),
-        TextField(
+        TextFormField(
           controller: textController,
           style: const TextStyle(
               fontWeight: FontWeight.w200, color: Colors.black, fontSize: 14),
           onTap: onTap,
-          decoration: InputDecoration(prefixIcon: prefixIcon),
+          onChanged: onChanged,
+          decoration: InputDecoration(
+              prefixIcon: prefixWidget, suffixIcon: suffixWidget),
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
+          validator: validator,
         )
       ],
     );

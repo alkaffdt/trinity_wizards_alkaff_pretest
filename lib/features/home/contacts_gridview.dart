@@ -11,17 +11,22 @@ class ContactsListview extends ConsumerWidget {
     ref.watch(contactListControllerProvider);
     final list = ref.watch(contactListControllerProvider);
 
-    return GridView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 25),
-      itemCount: list.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 0.9,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2),
-      itemBuilder: (context, index) {
-        return ContactItemView(list[index]);
-      },
+    return RefreshIndicator(
+      onRefresh: () => ref
+          .read(contactListControllerProvider.notifier)
+          .gatherContactsFromJson(),
+      child: GridView.builder(
+        padding: const EdgeInsets.symmetric(vertical: 25),
+        itemCount: list.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 0.9,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 10,
+            crossAxisCount: 2),
+        itemBuilder: (context, index) {
+          return ContactItemView(list[index]);
+        },
+      ),
     );
   }
 }

@@ -12,28 +12,41 @@ class ContactDetailCta extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(contactDetailControllerProvider);
+
     final isCreateNewContact =
-        ref.watch(contactDetailControllerProvider).contact == null;
+        ref.watch(contactDetailControllerProvider.notifier).contact == null;
+
+    final isValidated =
+        ref.watch(contactDetailControllerProvider.notifier).isValidated();
 
     return Column(
       children: [
         if (isCreateNewContact)
           CtaButton(
             text: "Save",
-            onPressed: () {
-              ref.read(contactDetailControllerProvider).createNewContact();
+            onPressed: isValidated
+                ? () {
+                    ref
+                        .read(contactDetailControllerProvider.notifier)
+                        .createNewContact();
 
-              Navigator.pop(context);
-            },
+                    Navigator.pop(context);
+                  }
+                : null,
           )
         else ...[
           CtaButton(
             text: "Update",
-            onPressed: () {
-              ref.read(contactDetailControllerProvider).updateContact();
+            onPressed: isValidated
+                ? () {
+                    ref
+                        .read(contactDetailControllerProvider.notifier)
+                        .updateContact();
 
-              Navigator.pop(context);
-            },
+                    Navigator.pop(context);
+                  }
+                : null,
           ),
           16.toHeightGap(),
           CtaButton(
@@ -43,7 +56,9 @@ class ContactDetailCta extends ConsumerWidget {
             borderColor: ConstColors.red,
             fontWeight: FontWeight.w100,
             onPressed: () {
-              ref.read(contactDetailControllerProvider).removeContact();
+              ref
+                  .read(contactDetailControllerProvider.notifier)
+                  .removeContact();
 
               Navigator.pop(context);
 

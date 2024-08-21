@@ -16,6 +16,12 @@ class SearchContactField extends ConsumerWidget {
       onChanged: (value) {
         ref.read(contactListControllerProvider.notifier).searchOnChange();
       },
+      decoration: InputDecoration(
+          hintText: "Search your contact list...",
+          suffixIcon: Image.asset(
+            "assets/icons/search_icon.png",
+            scale: 3,
+          )),
     );
   }
 }
